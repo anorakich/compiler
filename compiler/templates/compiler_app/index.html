@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aboba</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<button id="add_keyword">add_keyword</button>
+<form id="main-form" method="post">
+    {% csrf_token %}
+    <br>
+    <hr>
+    <textarea name="code"></textarea>
+    <input type="submit">
+    <input type="hidden" name="keywords_counter" value=0 id="keywords_counter">
+</form>
+{% if answer %}
+{{answer}}
+{% endif %}
+<script
+        src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+        crossorigin="anonymous">
+</script>
+<script>
+    var keywords_counter = 0
+    $(document).ready(function () {
+        $("#add_keyword").click(function () {
+            keywords_counter++;
+            first_name = 'keyword' + keywords_counter;
+            second_name = 'keyword_value' + keywords_counter;
+            $("#main-form").prepend(`<input type='text' name=${first_name}> = <input type='text' name=${second_name}> <hr>`)
+            $("#keywords_counter").attr("value", keywords_counter)
+        });
+    })
+</script>
+</body>
+
+</html>
